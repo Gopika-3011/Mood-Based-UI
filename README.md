@@ -32,7 +32,7 @@ Git & GitHub for version control
 
 Clone the repository:
 
-git clone https://github.com/your-username/your-repo.git
+git clone (https://github.com/Gopika-3011/Mood-Based-UI.git)
 
 
 Navigate into the project folder:
