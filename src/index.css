@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Make sure root can be full height */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+/* Optional: hide scrollbars for the mood row */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+select {
+  appearance: none; /* removes default arrows */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background: rgb(255, 255, 255);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 3px solid #170a0a;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-left: 35%;
+}
+
+/* optional: add your own custom arrow */
+select::after {
+  content: "▼";
+  position: absolute;
+  right: 10px;
+  pointer-events: none;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -30%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.4s ease-out;
+}
+
+@keyframes glowPulse {
+  0% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.2);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+
+
+.animated-bg {
+  animation: glowPulse 6s infinite ease-in-out;
+}
+

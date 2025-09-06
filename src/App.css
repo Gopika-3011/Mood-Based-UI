@@ -1,0 +1,41 @@
+/* Hide scrollbar but allow scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE & Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: linear-gradient(to bottom, #ffdd00, #ff8800); /* yellow → orange */
+  background-attachment: fixed; /* prevents repeat/scrolling effect */
+  background-size: cover;
+}
+select {
+  appearance: none; /* removes default arrows */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 2px solid #444;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+/* optional: add your own custom arrow */
+select::after {
+  content: "▼";
+  position: absolute;
+  right: 10px;
+  pointer-events: none;
+}
