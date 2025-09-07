@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import { useMood } from "./context/MoodContext";
 import MoodSelector from "./components/MoodSelector";
@@ -10,7 +11,6 @@ import ContactPage from "./pages/ContactPage";
 import Notification from "./components/Notification";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
-import { useCallback } from "react";
 
 export default function App() {
   const { mood } = useMood();
@@ -34,11 +34,11 @@ export default function App() {
   };
 
   const musicMap = {
-    happy: process.env.PUBLIC_URL + "/sounds/happy.mp3",
-    sad: process.env.PUBLIC_URL + "/sounds/sad.mp3",
-    energetic: process.env.PUBLIC_URL + "/sounds/energetic.mp3",
-    calm: process.env.PUBLIC_URL + "/sounds/calm.mp3",
-    default: process.env.PUBLIC_URL + "/sounds/default.mp3",
+    happy: process.env.PUBLIC_URL + "/sounds/happy.mp3.mp3",
+    sad: process.env.PUBLIC_URL + "/sounds/sad.mp3.mp3",
+    energetic: process.env.PUBLIC_URL + "/sounds/energetic.mp3.mp3",
+    calm: process.env.PUBLIC_URL + "/sounds/calm.mp3.mp3",
+    default: process.env.PUBLIC_URL + "/sounds/default.mp3.mp3",
   };
 
   // update music when mood changes
@@ -95,8 +95,7 @@ export default function App() {
     position: "fixed",
     inset: 0,
     display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    
     flexDirection: "column",
     minHeight: "100vh",   // full screen height
     fontFamily: themes[mood]?.font,
@@ -133,15 +132,53 @@ export default function App() {
           <Notification message={notification} onClose={() => setNotification(null)} />
         )}
 
-        {/* Navbar */}
-        <nav className="flex justify-center gap-6 p-4 bg-black/30 text-white font-bold relative z-10">
-          <Link to="/">Home   </Link>
-          <Link to="/about">About  </Link>
-          <Link to="/contact">Contact</Link>
-        </nav>
+ 
 
-        {/* Page Content */}
-<div className="flex-1 flex items-center justify-center relative z-10">
+
+<header className="w-full fixed top-0 left-0 z-50">
+  <ul
+    className="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm"
+    id="pillNav2"
+    role="tablist"
+  >
+    <li className="nav-item" role="presentation">
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          "nav-link rounded-5" + (isActive ? " active" : "")
+        }
+      >
+        Home
+      </NavLink>
+    </li>
+    <li className="nav-item" role="presentation">
+      <NavLink
+        to="/about"
+        className={({ isActive }) =>
+          "nav-link rounded-5" + (isActive ? " active" : "")
+        }
+      >
+        About
+      </NavLink>
+    </li>
+    <li className="nav-item" role="presentation">
+      <NavLink
+        to="/contact"
+        className={({ isActive }) =>
+          "nav-link rounded-5" + (isActive ? " active" : "")
+        }
+      >
+        Contact
+      </NavLink>
+    </li>
+  </ul>
+</header>
+
+   {/* Page Content */}
+<div
+  className="flex-1 flex items-center justify-center relative z-10"
+  style={{ paddingTop: "100px" }}   // adjust based on your nav height
+>
 <div className="max-w-2xl w-full bg-white/20 backdrop-blur-sm rounded-2xl p-8 shadow-xl text-center">
     <Routes>
       <Route path="/" element={<HomePage />} />
@@ -152,17 +189,19 @@ export default function App() {
     {/* Mood-based Quote */}
     <div
       className="mt-6 italic text-gray-900"
-      style={{ fontFamily: themes[mood]?.font, fontSize: themes[mood]?.fontSize }}
+      style={{ fontFamily: themes[mood]?.font, fontSize: themes[mood]?.fontSize,  paddingTop: "30px" }}
     >
       {quotes[mood] || quotes.default}
     </div>
 
     {/* Mood selector + Play/Pause */}
-    <div className="mt-6 flex justify-center gap-4">
+    <div className="mt-6 flex flex-col items-center space-y-8"
+    style={{ paddingTop: "60px" }} >
       <MoodSelector />
       <button
         onClick={handlePlayPause}
         className="px-4 py-2 bg-black text-white rounded-lg shadow-md hover:bg-gray-700"
+        style={{ paddingTop: "60px" }}
       >
         {isPlaying ? "⏸ Pause" : "▶ Play"}
       </button>

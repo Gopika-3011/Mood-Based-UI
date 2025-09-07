@@ -6,6 +6,7 @@
 html, body, #root {
   height: 100%;
   margin: 0;
+  overflow: hidden;
 }
 
 /* Optional: hide scrollbars for the mood row */
@@ -68,3 +69,23 @@ select::after {
   animation: glowPulse 6s infinite ease-in-out;
 }
 
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-container {
+  flex: 1;
+  display: flex;
+  align-items: center;   /* vertically center */
+  justify-content: center; /* horizontally center */
+  padding: 20px;
+}
+
+#pillNav2 {
+  --bs-nav-link-color: var(--bs-white);
+  --bs-nav-pills-link-active-color: var(--bs-primary);
+  --bs-nav-pills-link-active-bg: var(--bs-white);
+}
+ 
